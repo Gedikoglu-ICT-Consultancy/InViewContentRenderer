@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget
+    id="com.tgict.widget.web.inviewcontentrenderer.InViewContentRenderer"
+    pluginWidget="true"
+    needsEntityContext="false"
+    offlineCapable="true"
+    supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd"
+>
+    <name>In View Content Renderer</name>
+    <description>
+        Lazy-loads and renders content as it enters the viewport, optimizing resource usage and improving page
+        performance.
+    </description>
+    <studioProCategory>Structure</studioProCategory>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <property key="content" type="widgets" required="false">
+                <caption>Content</caption>
+                <description>
+                    Widgets to be rendered inside this container when it becomes visible in the viewport.
+                </description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
