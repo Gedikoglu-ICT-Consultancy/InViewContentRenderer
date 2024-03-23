@@ -4,7 +4,25 @@ export interface InViewContentRendererProps {
     content?: ReactNode;
 }
 
-const isElementInViewport = (element: HTMLElement): boolean => {
+const isElementVisible = (element: HTMLElement): boolean => {
+    const style = window.getComputedStyle(element);
+
+    // Check if the element itself is hidden
+    if (style.display === "none" || style.visibility === "hidden") {
+        return false;
+    }
+
+    // Check if any parent elements are hidden
+    let parent = element.parentElement;
+    while (parent) {
+        const parentStyle = window.getComputedStyle(parent);
+        if (parentStyle.display === "none" || parentStyle.visibility === "hidden") {
+            return false;
+        }
+        parent = parent.parentElement;
+    }
+
+    // Check if the element is within the viewport
     const rect = element.getBoundingClientRect();
     return (
         rect.top >= 0 &&
@@ -20,7 +38,7 @@ export function InViewContentRenderer({ content }: InViewContentRendererProps): 
 
     const handleVisibilityChange = () => {
         if (!document.hidden && ref.current) {
-            const currentlyVisible = isElementInViewport(ref.current);
+            const currentlyVisible = isElementVisible(ref.current);
             if (currentlyVisible) {
                 setIsVisible(true);
             }
@@ -28,6 +46,15 @@ export function InViewContentRenderer({ content }: InViewContentRendererProps): 
     };
 
     useEffect(() => {
+        const checkInitialVisibility = () => {
+            if (ref.current && isElementVisible(ref.current)) {
+                setIsVisible(true);
+            }
+        };
+
+        // Use setTimeout to delay the initial check until after the component has rendered
+        setTimeout(checkInitialVisibility, 0);
+
         document.addEventListener("visibilitychange", handleVisibilityChange);
 
         const observer = new IntersectionObserver(

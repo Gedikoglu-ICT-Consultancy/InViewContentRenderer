@@ -1,7 +1,7 @@
 {
     "name": "inviewcontentrenderer-web",
     "widgetName": "InViewContentRenderer",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Lazy-loads and renders content as it enters the viewport, optimizing resource usage and improving page performance.",
     "copyright": "© Gedikoğlu ICT Consultancy 2023. All rights reserved.",
     "author": "Taner Gedikoğlu",
